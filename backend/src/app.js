@@ -26,9 +26,14 @@ app.use(
     })
 );
 
-app.get('/', (req,res) => {
+// Routes
+import authRoutes from "./routes/auth.routes.js";
+
+app.get("/", (req, res) => {
     res.send("Welcome to ecommerce backend");
 });
+
+app.use("/api/v1/auth", authRoutes);
 
 
 export default app;
