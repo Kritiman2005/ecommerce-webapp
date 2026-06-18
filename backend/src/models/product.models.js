@@ -7,6 +7,16 @@ const productSchema = new Schema({
         required: true,
         index: true,
     },
+    image:{
+        type: {
+            url: String,
+            localPath: String,
+        },
+        default: {
+            url: `https://placehold.co/200x200`,
+            localPath: "",
+        },
+    },
     description: {
         type: String,
         required: true,
@@ -26,10 +36,6 @@ const productSchema = new Schema({
     createdBy:{
         type: Schema.Types.ObjectId,
         ref: "User",
-        required: true,
-    },
-    imageUrl: {
-        type: String,
         required: true,
     },
 },
