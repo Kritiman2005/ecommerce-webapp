@@ -275,6 +275,24 @@ const resetForgotPassword = async (req, res) => {
         .json(new ApiResponse(200, {}, "Password reset successfully"));
 };
 
+const assignRole = async(req,res) => {
+    const {userId, role} =  req.body;
+
+    const user = await User.findByIdAndUpdate(
+        userId,
+        {role},
+        {new: true},
+    );
+    
+    if (!user) {
+        throw new ApiError(404, "User not found");
+    }
+
+    return res
+        .status(200)
+        .json(new ApiResponse(200, { user }, "Role updated successfully"));
+};
+
 export {
     registerUser,
     loginUser,
@@ -283,4 +301,5 @@ export {
     changeCurrentPassword,
     forgotPasswordRequest,
     resetForgotPassword,
+    assignRole,
 };

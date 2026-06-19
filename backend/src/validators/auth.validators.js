@@ -1,4 +1,5 @@
 import { body, param } from "express-validator";
+import { AvailableUsersRole } from "../utils/constants.js";
 
 const registerValidator = [
     body("username")
@@ -60,10 +61,24 @@ const resetPasswordValidator = [
         .withMessage("New password must be at least 6 characters"),
 ];
 
+const assignRoleValidator = [
+    body("userId")
+        .notEmpty()
+        .withMessage("User ID is required")
+        .isMongoId()
+        .withMessage("Invalid user ID"),
+    body("role")
+        .notEmpty()
+        .withMessage("Role is required")
+        .isIn(AvailableUsersRole)
+        .withMessage(`Role must be one of: ${AvailableUsersRole.join(", ")}`),
+];
+
 export {
     registerValidator,
     loginValidator,
     changePasswordValidator,
     forgotPasswordValidator,
     resetPasswordValidator,
+    assignRoleValidator,
 };

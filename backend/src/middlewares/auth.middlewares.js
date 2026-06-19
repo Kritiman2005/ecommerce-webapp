@@ -31,3 +31,13 @@ export const verifyJWT = async(req,res,next) => {
 };
 
 
+export const validateUserRole = (roles = []) => {
+    return (req, res, next) => {
+        if (!roles.includes(req.user?.role)) {
+            throw new ApiError(403, "You are not authorised to perform this action");
+        }
+        next();
+    };
+};
+
+

@@ -7,6 +7,7 @@ import {
     changeCurrentPassword,
     forgotPasswordRequest,
     resetForgotPassword,
+    assignRole,
 } from "../controllers/auth.controller.js";
 import {
     registerValidator,
@@ -14,9 +15,10 @@ import {
     changePasswordValidator,
     forgotPasswordValidator,
     resetPasswordValidator,
+    assignRoleValidator,
 } from "../validators/auth.validators.js";
 import { validate } from "../validators/validate.js";
-import { verifyJWT } from "../middlewares/auth.middlewares.js";
+import { verifyJWT, validateUserRole } from "../middlewares/auth.middlewares.js";
 
 const router = Router();
 
@@ -30,5 +32,8 @@ router.post("/reset-password/:token", resetPasswordValidator, validate, resetFor
 // Protected routes (require authentication)
 router.post("/logout", verifyJWT, logoutUser);
 router.post("/change-password", verifyJWT, changePasswordValidator, validate, changeCurrentPassword);
+
+// Admin only routes
+router.patch("/assign-role", verifyJWT, validateUserRole(["admin"]), assignRoleValidator, validate, assignRole);
 
 export default router;
