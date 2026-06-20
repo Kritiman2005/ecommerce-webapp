@@ -5,7 +5,8 @@ import { ApiError } from "../utils/api-error.js";
 
 
 const addToCart = async(req,res) => {
-    const{productId,quantity} = req.body;
+    const{productId} = req.params;
+    const{quantity} = req.body;
     
     const product = await Product.findById(productId);
 
@@ -60,7 +61,8 @@ const getCart = async(req,res) => {
 };
 
 const updateCartItemQuantity = async(req,res) => {
-    const {productId, quantity} = req.body;
+    const {productId} = req.params;
+    const {quantity} = req.body;
 
     const cart = await  Cart.findOne({addedBy: req.user?._id});
 
@@ -96,7 +98,7 @@ const updateCartItemQuantity = async(req,res) => {
 
 const removeFromCart = async(req,res) => {
     
-    const {productId} = req.body;
+    const {productId} = req.params;
 
     const cart = await Cart.findOne({addedBy: req.user?._id});
 

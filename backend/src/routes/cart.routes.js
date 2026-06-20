@@ -20,9 +20,9 @@ const router = Router();
 router.use(verifyJWT);
 
 router.get("/", getCart);
-router.post("/add", addToCartValidator, validate, addToCart);
-router.patch("/update", updateCartItemValidator, validate, updateCartItemQuantity);
-router.delete("/remove", removeFromCartValidator, validate, removeFromCart);
+router.post("/add/:productId", addToCartValidator, validate, addToCart);
+router.patch("/update/:productId", updateCartItemValidator, validate, updateCartItemQuantity);
+router.delete("/remove/:productId", removeFromCartValidator, validate, removeFromCart);
 router.delete("/clear", clearCart);
 
 export default router;

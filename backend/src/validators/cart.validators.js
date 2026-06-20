@@ -1,9 +1,7 @@
-import { body } from "express-validator";
+import { body, param } from "express-validator";
 
 const addToCartValidator = [
-    body("productId")
-        .notEmpty()
-        .withMessage("Product ID is required")
+    param("productId")
         .isMongoId()
         .withMessage("Invalid product ID"),
     body("quantity")
@@ -13,9 +11,7 @@ const addToCartValidator = [
 ];
 
 const updateCartItemValidator = [
-    body("productId")
-        .notEmpty()
-        .withMessage("Product ID is required")
+    param("productId")
         .isMongoId()
         .withMessage("Invalid product ID"),
     body("quantity")
@@ -26,9 +22,7 @@ const updateCartItemValidator = [
 ];
 
 const removeFromCartValidator = [
-    body("productId")
-        .notEmpty()
-        .withMessage("Product ID is required")
+    param("productId")
         .isMongoId()
         .withMessage("Invalid product ID"),
 ];
