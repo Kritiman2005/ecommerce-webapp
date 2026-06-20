@@ -1,5 +1,5 @@
 import mongoose , {Schema} from "mongoose";
-import { OrderStatusEnum, AvailableOrderStatus } from "../utils/constants";
+import { OrderStatusEnum, AvailableOrderStatus } from "../utils/constants.js";
 
 
 const orderSchema = new Schema({
@@ -22,9 +22,11 @@ const orderSchema = new Schema({
     },
     shippingAddress: {
         type: String,
+        required: true,
     },
     totalAmount: {
         type: Number,
+        required: true,
     },
 },
 {
