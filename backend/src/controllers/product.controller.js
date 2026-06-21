@@ -46,7 +46,7 @@ const createProduct = async (req, res) => {
 };
 
 const getAllProducts = async (req, res) => {
-    const { name, category, minPrice, maxPrice, page , limit } = req.query;
+    const { name, category, minPrice, maxPrice, page = 1, limit = 10 } = req.query;
 
     const filter = {};
 

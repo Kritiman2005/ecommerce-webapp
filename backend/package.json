@@ -1,6 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
+  "type": "module",
   "description": "an ecommerce web app built with node js",
   "main": "index.js",
   "scripts": {

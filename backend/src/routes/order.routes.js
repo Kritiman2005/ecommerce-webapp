@@ -25,7 +25,7 @@ router.get("/my-orders", getMyOrders);
 router.get("/:orderId", orderIdValidator, validate, getOrderById);
 
 // Admin routes
-router.get("/", validateUserRole(["admin"]), getAllOrders);
+router.get("/all", validateUserRole(["admin"]), getAllOrders);
 router.patch("/:orderId/status", validateUserRole(["admin"]), updateOrderStatusValidator, validate, updateOrderStatus);
 
 export default router;

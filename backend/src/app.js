@@ -19,7 +19,7 @@ app.use(cookieParser());
 //CORS configuration
 app.use(
     cors({
-      origin: process.env.CORS_ORIGIN?.split(",") || "https://localhost:5173",
+      origin: process.env.CORS_ORIGIN?.split(",") || "http://localhost:5173",
       credentials: true,
       methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
       allowedHeaders: ["Content-Type", "Authorization"]
@@ -42,6 +42,19 @@ app.use("/api/v1/products", productRoutes);
 app.use("/api/v1/cart", cartRoutes);
 app.use("/api/v1/orders", orderRoutes);
 app.use("/api/v1/reviews", reviewRoutes);
+
+// Global error handler
+app.use((err, req, res, next) => {
+    const statusCode = err.statusCode || 500;
+    const message = err.message || "Something went wrong";
+
+    return res.status(statusCode).json({
+        success: false,
+        statusCode,
+        message,
+        errors: err.errors || [],
+    });
+});
 
 
 export default app;

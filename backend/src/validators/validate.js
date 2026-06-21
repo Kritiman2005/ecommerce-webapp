@@ -3,7 +3,7 @@ import { ApiError } from "../utils/api-error.js";
 
 /**
  * Middleware that checks for validation errors from express-validator.
- * If errors exist, throws an ApiError with 422 status and the error details.
+ * If errors exist, passes an ApiError to the error handler.
  */
 export const validate = (req, res, next) => {
     const errors = validationResult(req);
@@ -14,7 +14,7 @@ export const validate = (req, res, next) => {
             message: err.msg,
         }));
 
-        throw new ApiError(422, "Validation failed", extractedErrors);
+        return next(new ApiError(422, "Validation failed", extractedErrors));
     }
 
     next();
