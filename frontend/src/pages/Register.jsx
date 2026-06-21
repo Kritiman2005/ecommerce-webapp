@@ -6,18 +6,13 @@ import { registerUser, clearError, clearMessage } from "../store/slices/authSlic
 export default function Register() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loading, error, message } = useSelector((state) => state.auth);
+  const { loading, error, isAuthenticated } = useSelector((state) => state.auth);
 
   const [form, setForm] = useState({ username: "", email: "", password: "" });
 
   useEffect(() => {
-    if (message) {
-      setTimeout(() => {
-        navigate("/login");
-        dispatch(clearMessage());
-      }, 2000);
-    }
-  }, [message, navigate, dispatch]);
+    if (isAuthenticated) navigate("/");
+  }, [isAuthenticated, navigate]);
 
   useEffect(() => {
     return () => dispatch(clearError());

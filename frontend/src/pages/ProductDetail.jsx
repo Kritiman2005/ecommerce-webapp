@@ -15,6 +15,7 @@ export default function ProductDetail() {
 
   const [quantity, setQuantity] = useState(1);
   const [reviewForm, setReviewForm] = useState({ rating: 5, comment: "" });
+  const [cartMessage, setCartMessage] = useState(null);
 
   useEffect(() => {
     dispatch(fetchProductById(productId));
@@ -22,7 +23,15 @@ export default function ProductDetail() {
   }, [dispatch, productId]);
 
   const handleAddToCart = () => {
-    dispatch(addToCart({ productId, quantity }));
+    dispatch(addToCart({ productId, quantity })).then((res) => {
+      if (!res.error) {
+        setCartMessage("Added to cart!");
+        setTimeout(() => setCartMessage(null), 2000);
+      } else {
+        setCartMessage("Failed to add to cart");
+        setTimeout(() => setCartMessage(null), 3000);
+      }
+    });
   };
 
   const handleSubmitReview = (e) => {
@@ -89,6 +98,12 @@ export default function ProductDetail() {
 
           {!isAuthenticated && (
             <p className="text-sm text-gray-400 mt-3">Please login to add items to cart</p>
+          )}
+
+          {cartMessage && (
+            <p className={`text-sm mt-3 ${cartMessage.includes("Failed") ? "text-danger" : "text-success"}`}>
+              {cartMessage}
+            </p>
           )}
         </div>
       </div>

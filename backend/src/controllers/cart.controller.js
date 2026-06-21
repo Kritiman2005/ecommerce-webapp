@@ -6,7 +6,7 @@ import { ApiError } from "../utils/api-error.js";
 
 const addToCart = async(req,res) => {
     const{productId} = req.params;
-    const{quantity} = req.body;
+    const quantity = Number(req.body.quantity) || 1;
     
     const product = await Product.findById(productId);
 

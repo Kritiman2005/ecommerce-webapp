@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchProducts } from "../store/slices/productSlice.js";
-import { Search, Filter } from "lucide-react";
+import { Search, Filter, Plus } from "lucide-react";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -37,6 +37,18 @@ export default function Home() {
 
   return (
     <div>
+      {/* Header with Create Button */}
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-2xl font-bold">Products</h1>
+        <Link
+          to="/create-product"
+          className="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary-dark rounded-lg transition"
+        >
+          <Plus size={18} />
+          Create Product
+        </Link>
+      </div>
+
       {/* Search and Filters */}
       <form onSubmit={handleSearch} className="mb-8 flex flex-wrap gap-4">
         <div className="flex-1 min-w-[200px] relative">

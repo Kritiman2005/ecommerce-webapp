@@ -16,6 +16,7 @@ import ResetPassword from "./pages/ResetPassword.jsx";
 import Cart from "./pages/Cart.jsx";
 import Checkout from "./pages/Checkout.jsx";
 import MyOrders from "./pages/MyOrders.jsx";
+import CreateProduct from "./pages/CreateProduct.jsx";
 
 // Admin pages
 import AdminDashboard from "./pages/admin/Dashboard.jsx";
@@ -42,6 +43,7 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="product/:productId" element={<ProductDetail />} />
+            <Route path="create-product" element={<CreateProduct />} />
             <Route path="cart" element={<Cart />} />
             <Route path="checkout" element={<Checkout />} />
             <Route path="my-orders" element={<MyOrders />} />

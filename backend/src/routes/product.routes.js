@@ -22,9 +22,9 @@ const router = Router();
 router.get("/", getAllProductsValidator, validate, getAllProducts);
 router.get("/:productId", productIdValidator, validate, getProductById);
 
-// Protected routes (admin only)
-router.post("/", verifyJWT, validateUserRole(["admin"]), upload.single("image"), createProductValidator, validate, createProduct);
-router.patch("/:productId", verifyJWT, validateUserRole(["admin"]), upload.single("image"), updateProductValidator, validate, updateProduct);
-router.delete("/:productId", verifyJWT, validateUserRole(["admin"]), productIdValidator, validate, deleteProduct);
+// Protected routes (any authenticated user)
+router.post("/", verifyJWT, upload.single("image"), createProductValidator, validate, createProduct);
+router.patch("/:productId", verifyJWT, upload.single("image"), updateProductValidator, validate, updateProduct);
+router.delete("/:productId", verifyJWT, productIdValidator, validate, deleteProduct);
 
 export default router;
