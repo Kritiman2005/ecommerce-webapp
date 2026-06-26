@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { registerUser, clearError, clearMessage } from "../store/slices/authSlice.js";
+import { registerUser, clearError } from "../store/slices/authSlice.js";
 
 export default function Register() {
   const dispatch = useDispatch();
@@ -32,12 +32,6 @@ export default function Register() {
         {error && (
           <div className="bg-danger/10 border border-danger/30 text-danger px-4 py-3 rounded-lg mb-6 text-sm">
             {error}
-          </div>
-        )}
-
-        {message && (
-          <div className="bg-success/10 border border-success/30 text-success px-4 py-3 rounded-lg mb-6 text-sm">
-            {message}
           </div>
         )}
 
