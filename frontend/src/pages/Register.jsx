@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser, clearError } from "../store/slices/authSlice.js";
+import { toast } from "react-hot-toast";
 
 export default function Register() {
   const dispatch = useDispatch();
@@ -20,6 +21,24 @@ export default function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    // Validation
+    if (form.username.trim().length < 3) {
+      toast.error("Username must be at least 3 characters");
+      return;
+    }
+    
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(form.email)) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+    
+    if (form.password.length < 6) {
+      toast.error("Password must be at least 6 characters");
+      return;
+    }
+    
     dispatch(registerUser(form));
   };
 
